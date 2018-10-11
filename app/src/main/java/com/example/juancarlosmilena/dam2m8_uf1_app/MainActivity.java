@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 comprobar_respuesta(true);
+                actualizar_indice();
                 actualizar_pregunta();
+
             }
         });
 
@@ -46,7 +48,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 comprobar_respuesta(false);
+                actualizar_indice();
                 actualizar_pregunta();
+
             }
         });
 
@@ -58,6 +62,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void actualizar_indice() {
+
+        indice++;
+        if(indice==lista_preguntas.size()) {
+            indice = 0;
+        }
     }
 
     private void mostrar_pista(int id_pista) {
@@ -84,10 +96,6 @@ public class MainActivity extends AppCompatActivity {
     private void actualizar_pregunta() {
 
         pregunta.setText(lista_preguntas.get(indice).getId_pregunta());
-        indice++;
-        if(indice==lista_preguntas.size()){
-            indice = 0;
-        }
 
     }
 }
