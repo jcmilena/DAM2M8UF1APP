@@ -1,5 +1,6 @@
 package com.example.juancarlosmilena.dam2m8_uf1_app;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     TextView pregunta;
-    Button b_verdadero, b_falso;
+    Button b_verdadero, b_falso, b_pista;
 
     List<Pregunta> lista_preguntas = new ArrayList<>();
     int indice = 0;
@@ -23,12 +24,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lista_preguntas.add(new Pregunta(R.string.pregunta1, true));
-        lista_preguntas.add(new Pregunta(R.string.pregunta2, false));
+        lista_preguntas.add(new Pregunta(R.string.pregunta1, true, R.drawable.globos1));
+        lista_preguntas.add(new Pregunta(R.string.pregunta2, false, R.drawable.globos2));
 
         b_verdadero = findViewById(R.id.verdadero);
         b_falso = findViewById(R.id.falso);
         pregunta = findViewById(R.id.texto_pregunta);
+        b_pista = findViewById(R.id.b_Pista);
 
         actualizar_pregunta();
 
@@ -47,6 +49,22 @@ public class MainActivity extends AppCompatActivity {
                 actualizar_pregunta();
             }
         });
+
+        b_pista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                mostrar_pista(lista_preguntas.get(indice).getId_pista());
+            }
+        });
+
+    }
+
+    private void mostrar_pista(int id_pista) {
+
+        Intent intent = new Intent(this, PistaActivity.class);
+        intent.putExtra("pista_tag", id_pista);
+        startActivity(intent);
 
 
     }
@@ -67,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         pregunta.setText(lista_preguntas.get(indice).getId_pregunta());
         indice++;
-        if(indice<lista_preguntas.size()){
+        if(indice==lista_preguntas.size()){
             indice = 0;
         }
 

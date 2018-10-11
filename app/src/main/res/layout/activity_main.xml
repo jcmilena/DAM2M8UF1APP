@@ -24,14 +24,20 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="V"
+            android:text="Veritat"
             android:id="@+id/verdadero"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="V"
+            android:text="Fals"
             android:id="@+id/falso"/>
     </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pista"
+        android:id="@+id/b_Pista"/>
 
 </LinearLayout>
