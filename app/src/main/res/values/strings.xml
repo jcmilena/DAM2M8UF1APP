@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DAM2M8-UF1-APP</string>
+    <string name="pregunta1">Soy la pregunta 1</string>
+    <string name="pregunta2">Soy la pregunta 2</string>
 </resources>
