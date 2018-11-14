@@ -2,6 +2,20 @@
     <string name="app_name">DAM2M8-UF1-APP</string>
     <string name="pregunta1">Soy la pregunta 1</string>
     <string name="pregunta2">Soy la pregunta 2</string>
+    <string name="pregunta3">Soy la pregunta 3</string>
+    <string name="pregunta4">Soy la pregunta 4</string>
+
+    <string name="preguntaMult1">Soy la pregunta Multi 1</string>
+    <string name="preguntaMult2">Soy la pregunta Multi 2</string>
+    <string name="preguntaMult3">Soy la pregunta Multi 3</string>
+    <string name="preguntaMult4">Soy la pregunta Multi 4</string>
+
+    <string-array name="RespostaMult1">
+        <item>Resposta 1</item>
+        <item>Resposta 2</item>
+        <item>Resposta 3</item>
+        <item>Resposta 4</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

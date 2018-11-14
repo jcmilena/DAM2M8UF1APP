@@ -3,6 +3,7 @@ package com.example.juancarlosmilena.dam2m8_uf1_app;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PreguntasFragment extends Fragment {
+public class PreguntasFragment extends Fragment  {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,6 +31,7 @@ public class PreguntasFragment extends Fragment {
     List<Pregunta> lista_preguntas = new ArrayList<>();
 
     int indice = 0;
+    int aciertos =0;
 
     private PreguntasFragmentListener mListener;
 
@@ -84,8 +86,8 @@ public class PreguntasFragment extends Fragment {
             public void onClick(View v) {
 
 
-                mListener.comprobar_respuesta(true);
-                actualizar_indice();
+                aciertos= mListener.comprobar_respuesta(true);
+                indice= mListener.actualizar_indice();
                 actualizar_pregunta();
 
             }
@@ -94,8 +96,8 @@ public class PreguntasFragment extends Fragment {
         b_falso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.comprobar_respuesta(false);
-                actualizar_indice();
+                aciertos = mListener.comprobar_respuesta(false);
+                indice= mListener.actualizar_indice();
                 actualizar_pregunta();
 
             }
@@ -133,16 +135,39 @@ public class PreguntasFragment extends Fragment {
 
     public void actualizar_pregunta() {
 
-        pregunta.setText(lista_preguntas.get(indice).getId_pregunta());
+        if (indice < lista_preguntas.size()) {
+            pregunta.setText(lista_preguntas.get(indice).getId_pregunta());
+        }
 
     }
 
-    public void actualizar_indice() {
+    public int comprobar_respuesta(boolean usada) {
+
+        if (indice < lista_preguntas.size()){
+            if(usada == lista_preguntas.get(indice).isRespuesta()){
+                aciertos++;
+            }
+        }
+       return aciertos;
+    }
+
+    public int actualizar_indice() {
+
+        if(indice>=lista_preguntas.size()-1){
+            Log.i("ACIERTOS", "NUMERO ACIERTOS: "+aciertos);
+            mListener.dibujar_Dialog();
+        }
 
         indice++;
-        if(indice==lista_preguntas.size()) {
-            indice = 0;
-        }
+
+        return indice;
+    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        lista_preguntas.clear();
     }
 
     /**
@@ -157,8 +182,10 @@ public class PreguntasFragment extends Fragment {
      */
     public interface PreguntasFragmentListener {
         // TODO: Update argument type and name
-        void comprobar_respuesta(boolean usada);
         void mostrar_pista(int ResID);
         List<Pregunta> cargar_preguntas();
+        void dibujar_Dialog();
+        int comprobar_respuesta(boolean usada);
+        int actualizar_indice();
     }
 }
