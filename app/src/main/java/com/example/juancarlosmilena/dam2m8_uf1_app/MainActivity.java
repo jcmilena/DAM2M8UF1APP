@@ -16,7 +16,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements PreguntasFragment.PreguntasFragmentListener, DialogFiPartida.DialogFiPartidaListener {
+public class MainActivity extends AppCompatActivity implements PreguntasFragment.PreguntasFragmentListener, DialogFiPartida.DialogFiPartidaListener, PregMultiFragment.PregMultListener {
 
 
 
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements PreguntasFragment
     List<PreguntaMulti> lista_pregMulti = new ArrayList<>();
     int indice;
     int aciertos;
+    int joc = 0;
     Toolbar miToolbar;
 
     @Override
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements PreguntasFragment
         miToolbar = findViewById(R.id.toolbar_m8);
         setSupportActionBar(miToolbar);
 
-        nueva_partida(indice, aciertos);
+        nueva_partida(joc, indice, aciertos);
 
     }
 
@@ -98,6 +99,8 @@ public class MainActivity extends AppCompatActivity implements PreguntasFragment
         {
             case R.id.cambio_juego:
                 //cambio juego
+                joc=(joc==0) ? 1:0;
+                nueva_partida(joc,0,0);
             case R.id.juego1 :
                 // juego 1
             case R.id.juego2 :
@@ -127,14 +130,23 @@ public class MainActivity extends AppCompatActivity implements PreguntasFragment
     }
 
     @Override
-    public void nueva_partida(int ind, int aciert) {
+    public void nueva_partida(int joc, int ind, int aciert) {
 
         indice = ind;
         aciertos = aciert;
 
         FragmentManager fm = getSupportFragmentManager();
-        PreguntasFragment frag = new PreguntasFragment();
-        fm.beginTransaction().replace(R.id.fragment_container, frag).commit();
+        if(joc==0){
+            PreguntasFragment frag = new PreguntasFragment();
+            fm.beginTransaction().replace(R.id.fragment_container, frag).commit();
+        }
+        else{
+            PregMultiFragment frag = new PregMultiFragment();
+            fm.beginTransaction().replace(R.id.fragment_container, frag).commit();
+        }
+
+
+
 
     }
 

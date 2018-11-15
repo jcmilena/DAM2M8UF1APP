@@ -37,7 +37,7 @@ public class DialogFiPartida extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         // indice_pregunta = 0;
                         // actualizar_pregunta();
-                        mListener.nueva_partida(0,0);
+                        mListener.nueva_partida(0,0,0);
                     }
                 })
                 .setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -53,6 +53,6 @@ public class DialogFiPartida extends DialogFragment {
 
     public interface DialogFiPartidaListener{
 
-        void nueva_partida(int ind, int aciert);
+        void nueva_partida(int joc, int ind, int aciert);
     }
 }
