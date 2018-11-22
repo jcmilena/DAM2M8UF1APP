@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements PreguntasFragment
 
     List<Pregunta> lista_preguntas = new ArrayList<>();
     List<PreguntaMulti> lista_pregMulti = new ArrayList<>();
+    List<Partida> clasificacion;
     int indice;
     int aciertos;
     int joc = 0;
